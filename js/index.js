@@ -206,7 +206,7 @@ function sendEth(web3, updateBalance) {
         if (web3.utils.isAddress(txn.address)) {
           var tx = new Tx();
           tx.gasPrice = new BN(web3.utils.toWei(txn.fee, "shannon"));
-          tx.gasLimit = 21000;
+          tx.gasLimit = new BN(data.gas);
           tx.value = new BN(web3.utils.toWei(txn.amount, "ether"));
           tx.to = txn.address;
           tx.nonce = count++;
@@ -342,7 +342,6 @@ function getInputData() {
     }
 
     for (var addr in addrs) {
-      console.log(addr, addrs[addr]);
       if (addrs[addr] && addrs[addr] > 1) {
         alert(`found a duplicate entry: ${addr}, please remove one first`);
         resolve(undefined);
@@ -359,7 +358,6 @@ function getInputData() {
 function getWalletByAddress(address) {
   var nodes = document.querySelectorAll("input.address:not(.success)");
   for (var i = 0; i < nodes.length; i++) {
-    console.log(nodes[i].value);
     if (nodes[i].value == address) {
       return nodes[i].parentElement.parentElement;
     }
