@@ -204,7 +204,7 @@ function sendEth(web3, updateBalance) {
       // XXX: to reduce nonce on fail
       window.setTimeout(() => {
         if (web3.utils.isAddress(txn.address)) {
-          var tx = new Tx();
+          var tx = new Tx({chainId: 1});
           tx.gasPrice = new BN(web3.utils.toWei(txn.fee, "shannon"));
           tx.gasLimit = new BN(data.gas);
           tx.value = new BN(web3.utils.toWei(txn.amount, "ether"));
